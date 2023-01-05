@@ -1,41 +1,145 @@
-// 1) Generar dos variables: usuarioConEmail y contrasenia. Asignarle un valor aleatorio. A través de tres prompts, pídale al usuario los siguientes datos.
+const ARRAY_PRODUCTOS = [
+  {
+    id: 1,
+    producto: "leche",
+    precio: 200,
+    fechaVencimiento: "3/3/2023",
+    descripción: "Leche la serenísima",
+    oferta: true,
+  },
+  {
+    id: 2,
+    producto: "tapa de tarta criolla",
+    precio: 659,
+    fechaVencimiento: "5/1/2023",
+    descripción: "Tapa de tarta La Salteña",
+    oferta: false
+  },
+  {
+    id: 3,
+    producto: "mostacholes 500grm",
+    precio: 200,
+    descripción: "Matarazzo mostacholes 500grm",
+    oferta: true
+  },
+  {
+    id: 4,
+    producto: "pepsi 1,5L",
+    precio: 181,
+    descripción: "Pepsi botella 1,5L",
+    oferta: false
+  },
+  {
+    id: 5,
+    producto: "coca-cola sin azúcar 473ml",
+    precio: 150,
+    descripción: "Lata coca-cola",
+    oferta: true
+  },
+  {
+    id: 6,
+    producto: "huevo blanco x 30 unidades",
+    precio: 919,
+    descripción: "Huevo Blanco Grand Maple",
+    oferta: false
+  },
+  {
+    id: 7,
+    producto: "salsa tuco",
+    precio: 162,
+    descripción: "Salsa tuco Arcor 340grm",
+    oferta: true
+  },
+  {
+    id: 8,
+    producto: "lomo de atún al natural",
+    precio: 775,
+    descripción: "Lomo de atún La Campagnola",
+    oferta: false
+  },
+  {
+    id: 9,
+    producto: "espinaca",
+    precio: 768,
+    fechaVencimiento: "3/1/2024",
+    descripción: "Espinaca Granja del Sol 500g",
+    oferta: true
+  },
+  {
+    id: 10,
+    producto: "ravioles 4 quesos",
+    precio: 410,
+    fechaVencimiento: "30/5/2023",
+    descripción: "Ravioles 4 quesos La Salteña",
+    oferta: false
+  },
+  {
+    id: 11,
+    producto: "queso de rallar",
+    precio: 423,
+    fechaVencimiento: "3/3/2023",
+    descripción: "Queso de rallar coto",
+    oferta: true
+  },
+  {
+    id: 12,
+    producto: "jamon cocido 500g",
+    precio: 540,
+    descripción: "Jamon cocido Bocatti",
+    oferta: false
+  },
+  {
+    id: 13,
+    producto: "pizza mozzarella 650g",
+    precio: 1200,
+    descripción: "Pizza mozzarella Sibarita",
+    oferta: true
+  },
+  {
+    id: 14,
+    producto: "papas noisette 1kg",
+    precio: 741,
+    descripción: "Papas noisette Mc Cain",
+    oferta: false
+  },
+  {
+    id: 15,
+    producto: "papel higienico",
+    precio: 706,
+    descripción: "Papel higienico Elite",
+    oferta: true
+  },
+]
 
-/////////// PARA EL CASO LOGIN
-
-// TODOS LOS PUNTOS TIENEN QUE HACERSE CON FUNCIONES. CADA PUNTO PUEDE EXPRESARSE COMO UNA FUNCIÓN. LAS RESPONSABILIDADES DEBEN ESTAR SEPARADAS.
-//UTILICE FUNCIONES QUE RECIBAN PARÁMETROS Y PASE ARGUMENTOS EN LA LLAMADA.
-
-// a) A través de 3 prompts, pídale al usuario que ingrese su nombre, usuario y su contraseña. Valide que el usuario y la contraseña coincidan con los datos de las variables, estos datos tienen que ser iguales entre sí. En el caso de que no lo sean, devuelva un mensaje en forma de alerta, para cada uno de los casos: "Su usuario es erróneo" o "Su contraseña es errónea". EN EL CASO DE QUE SE EQUIVOQQUE EN LOS DOS: "SU USUARIO Y CONTRASEÑA SO ERRÓNEOS".
-
-// b) Luego de que el usuario se loguee exitosamente, envíe una alerta que notifique "Bienvenido ${nombre}". La alerta debe saludar al usuario que se loguea.
-// c) Valide con un bucle que el usuario tiene una arroba. En el caso que no la contenga, envíe un prompt con el siguiente mensaje: "Ingrese nuevo email". Cambie el valor de la variable usuarioConEmail.
-
-let nombreUsuario = prompt(" Ingresar Nombre ");
-let usuarioConEmail = prompt(" Ingresar correo electrónico ");
-
-let contrasenia = prompt("Ingresar Contraseña ");
-
-let validar = (user, pw) => {
-  if (usuarioConEmail == user && contrasenia == pw) {
-    return alert(`Bienvenido ${nombreUsuario}`);
-  } else if (usuarioConEmail != user && contrasenia != pw) {
-    return alert("SU USUARIO Y CONTRASEÑA SON ERRÓNEOS");
-  } else if (usuarioConEmail != user) {
-    alert("Su usuarioConEmail es erróneo");
-  } else if (contrasenia != pw) {
-    alert("Su contraseña es errónea");
+ARRAY_PRODUCTOS.forEach((producto) => {
+  if (producto.oferta == true) {
+    producto.precio_oferta = producto.precio * 0.9 // 10% de descuento
+    console.log(`Precio oferta del producto ${producto.producto}: $${producto.precio_oferta}`)
   }
-};
+})
 
-console.log(validar("ramiro@gmail.com", "ritairu"));
+let sortedArray = [...ARRAY_PRODUCTOS].sort((a,b) => {
+  if (a.producto > b.producto) {
+    return 1;
+  } else if (a.producto < b.producto) {
+    return -1;
+  } else {
+    return 0
+  }
+})
+console.log(sortedArray)
 
-const conArroba = (usuario) => {
-  let tieneArroba = false;
-  for (let i = 0; i < usuario.length; i++) {
-    if (usuario[i] === "@") {
-      return (tieneArroba = true);
-    }  
-  }return usuario = prompt("Ingrese nuevo email")
-};
 
-console.log(conArroba(usuarioConEmail));
+let confirmar = (confirm('¿Desea ver los productos en oferta?'))
+
+if (confirmar == true) {
+  const ofertas = ARRAY_PRODUCTOS.filter(x => x.oferta == true)
+  console.log(ofertas)
+}
+
+
+let eleccion = prompt("Ingrese el producto que desea buscar: ")
+let eleccionEnMinusculas = eleccion.toLowerCase()
+
+const productoElegido = ARRAY_PRODUCTOS.find(elemento => elemento.producto.includes(eleccionEnMinusculas))
+console.log(productoElegido)
